@@ -1,6 +1,8 @@
 import 'dart:io';
 
 void main() {
+  List<Product> products = [];
+
   while (true) {
     stdout.write('Input product name: ');
     String productName = stdin.readLineSync() ?? '';
@@ -10,6 +12,9 @@ void main() {
 
     stdout.write('Input unit price: ');
     double unitPrice = double.parse(stdin.readLineSync() ?? '0');
+
+    Product product = Product(productName, quantity, unitPrice);
+    products.add(product);
 
     double totalPrice = quantity * unitPrice;
 
@@ -40,5 +45,18 @@ void main() {
     if (choice?.toLowerCase() != 'y') {
       break;
     }
+  }
+}
+
+class Product {
+  String name;
+  int quantity;
+  double unitPrice;
+
+  Product(this.name, this.quantity, this.unitPrice);
+
+  @override
+  String toString() {
+    return 'Product: $name, Quantity: $quantity, Unit Price: ${unitPrice.toStringAsFixed(0)}';
   }
 }
